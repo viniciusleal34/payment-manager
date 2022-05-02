@@ -1,31 +1,31 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { Text, TouchableOpacity, TextInputProps } from "react-native";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useImperativeHandle,
+} from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useField } from "@unform/core";
 import { Container, TextInput, Icon } from "./styles";
 
-interface InputProps extends TextInputProps {
-  name: string;
-  icon?: string;
-  password?: boolean;
-  editable?: boolean;
-  desc?: boolean;
-  rawText?: string;
-  onInitialData?: any;
-  ref?: any;
-}
-
-interface InputValueReferer {
-  value: string;
-}
-
-const Input: React.FC<InputProps> = (
-  { name, icon, password, editable, desc, onInitialData, rawText, ...rest },
+export default function Input(
+  {
+    name,
+    onChangeText,
+    icon,
+    senha,
+    editable,
+    desc,
+    onInitialData,
+    rawText,
+    ...rest
+  },
   ref
-) => {
-  const inputElementRef = useRef<any>(null);
+) {
+  const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
-  const inputValueRef = useRef<InputValueReferer>({ value: defaultValue });
-  const [pass, setPass] = useState(password || false);
+  const [pass, setPass] = useState(senha || false);
 
   const [isFocused, setIsFocused] = useState(false);
   const [isField, setIsField] = useState(false);
@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = (
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
 
-    if (inputValueRef.current.value) {
+    if (inputRef.current.value) {
       setIsField(true);
     } else {
       setIsField(false);
@@ -51,23 +51,31 @@ const Input: React.FC<InputProps> = (
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: inputValueRef.current,
+      ref: inputRef.current,
       path: "value",
-      setValue(ref: any, value: string) {
-        inputValueRef.current.value = value;
-        inputElementRef.current.setNativeProps({
-          text: value,
-        });
+      clearValue(ref) {
+        ref.value = "";
+        ref.clear();
       },
-      clearValue() {
-        inputElementRef.current.value = "";
-        inputElementRef.current.clear();
+      getValue() {
+        if (rawText) return rawText;
+        if (inputRef.current) return inputRef.current.value;
+        return "";
+      },
+      setValue(ref, value) {
+        if (ref) {
+          ref.setNativeProps({ text: value, fontFamily: "Poppins_300Light" });
+          inputRef.current.value = value;
+        }
+      },
+      getValue(ref) {
+        return ref.value;
       },
     });
   }, [fieldName, rawText, registerField]);
 
   useEffect(() => {
-    inputValueRef.current.value = defaultValue;
+    inputRef.current.value = defaultValue;
   }, [defaultValue]);
 
   const handleSecure = useCallback(() => {
@@ -93,20 +101,21 @@ const Input: React.FC<InputProps> = (
         )}
         <TextInput
           {...rest}
-          ref={inputElementRef}
+          ref={inputRef}
           defaultValue={defaultValue}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           secureTextEntry={pass}
           editable={editable}
           selectionColor="#fff"
-          onChangeText={(value: string) => {
-            if (inputValueRef.current) {
-              inputValueRef.current.value = value;
+          onChangeText={(value) => {
+            if (inputRef.current) {
+              inputRef.current.value = value;
             }
+            if (onChangeText) onChangeText(value);
           }}
         />
-        {password && (
+        {senha && (
           <TouchableOpacity onPress={handleSecure}>
             {!pass && <Icon name="eye" size={20} color={"#666360"} />}
             {pass && <Icon name="eye-off" size={20} color={"#666360"} />}
@@ -121,6 +130,4 @@ const Input: React.FC<InputProps> = (
       )}
     </>
   );
-};
-
-export default Input;
+}

@@ -1,12 +1,5 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
-import {
-  StatusBar,
-  TouchableOpacity,
-  ScrollView,
-  Text,
-  Alert,
-  Platform,
-} from "react-native";
+import { TouchableOpacity, Text, Alert } from "react-native";
 import Input from "../../components/Input";
 import { Container, Image, BtnEdit } from "./styles";
 import { Form } from "@unform/mobile";
@@ -25,7 +18,6 @@ import baseUrl from "../../config/baseUrl";
 import loadAnimation from "../../assets/bearLoading.json";
 import { UserProps } from "../../interfaces/User";
 import { FormHandles } from "@unform/core";
-
 
 export default function Profile({ navigation }: GlobalProps) {
   const { userData, updateUser, updateImage, logout } = useContext(AuthContext);
@@ -118,10 +110,10 @@ export default function Profile({ navigation }: GlobalProps) {
   return (
     <KeyboardAwareScrollView>
       <Container
-        // contentContainerStyle={{ flexGrow: 1 }}
-        // keyboardShouldPersistTaps="handled"
-        // behavior={Platform.OS === "ios" ? "padding" : undefined}
-        // enabled
+      // contentContainerStyle={{ flexGrow: 1 }}
+      // keyboardShouldPersistTaps="handled"
+      // behavior={Platform.OS === "ios" ? "padding" : undefined}
+      // enabled
       >
         <Load visible={loading} svgLoading={loadAnimation} />
         <Form

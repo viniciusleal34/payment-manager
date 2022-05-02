@@ -158,6 +158,7 @@ export default function Login({ navigation }: GlobalProps) {
           type="cpf"
           placeholder="Insira seu CPF"
           icon="key"
+          keyboardType="numeric"
         />
         <Input
           maxLength={20}
