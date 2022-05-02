@@ -63,7 +63,10 @@ export default function ResetPass({ navigation }: GlobalProps) {
         />
       </Form>
 
-      <Button onPress={() => formRef.current?.submitForm()}>Criar Senha</Button>
+      <Button
+        onPress={() => formRef.current?.submitForm()}
+        title="Criar Senha"
+      />
     </Container>
   );
 }

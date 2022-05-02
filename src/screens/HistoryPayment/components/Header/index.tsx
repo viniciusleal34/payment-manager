@@ -1,5 +1,5 @@
 import React from "react";
-import mind from "../../../assets/mind-logo-comprido-branco.png";
+import mind from "../../../../../assets/mind-logo-comprido-branco.png";
 
 import { Container, Image, Text } from "./styles";
 

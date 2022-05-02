@@ -69,7 +69,7 @@ export default function Forgot({ navigation }: GlobalProps) {
         <Input name="email" placeholder="E-mail" icon="mail" />
       </Form>
 
-      <Button onPress={() => formRef.current?.submitForm()}>Enviar</Button>
+      <Button onPress={() => formRef.current?.submitForm()} title="Enviar" />
     </Container>
   );
 }

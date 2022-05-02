@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { Alert } from "react-native";
-import { Container, Forgot, TxtForgot } from "./styles";
+import { Container, Forgot, TxtForgot, Image } from "./styles";
 import InputMasked from "../../components/InputMasked";
 import Input from "../../components/Input";
 import { Form } from "@unform/mobile";
@@ -146,9 +146,9 @@ export default function Login({ navigation }: GlobalProps) {
 
   return (
     <Container>
-      {/* <Image
-        source={require('../../../assets/mindpay-logo-tipo-letra-branca.png')}
-      /> */}
+      <Image
+        source={require("../../../assets/mindpay-logo-tipo-letra-branca.png")}
+      />
 
       <Form ref={formRef} onSubmit={handleSubmit} style={{ width: "90%" }}>
         <InputMasked

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Image, StyleSheet, View, Text, FlatList } from "react-native";
-import receipt from "../../assets/document.png";
+import { FlatList } from "react-native";
+import receipt from "../../../assets/document.png";
 import { Container } from "./styles";
 import ModalPayment from "./components/Modal";
 import Card from "./components/Card";

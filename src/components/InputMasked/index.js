@@ -8,13 +8,10 @@ const InputMask = (
 ) => {
   const [text, setText] = useState("");
 
-  const handleChangeText = useCallback(
-    (maskedText, unmaskedText) => {
-      setText(maskedText);
-      setRawText(unmaskedText);
-    },
-    [text]
-  );
+  const handleChangeText = (maskedText, unmaskedText) => {
+    setText(maskedText);
+    setRawText(unmaskedText);
+  };
 
   return (
     <>
