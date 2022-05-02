@@ -11,6 +11,8 @@ export default {
       gray: "#666360",
       white: "#fff",
       white_opacity: "rgba(255,255,255,0.8)",
+      fail: "#ff0000",
+      success: "#00FF19",
     },
     fonts: {
       regular: "Montserrat_100Thin",

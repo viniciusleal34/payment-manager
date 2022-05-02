@@ -3,6 +3,15 @@ import { Alert } from "react-native";
 import { mutate } from "swr";
 import api from "../factory/api";
 
+export async function getHistoySalary() {
+  try {
+    const { data } = await api.get(`/request`);
+    return data;
+  } catch (e) {
+    return false;
+  }
+}
+
 export async function postSendSalary(
   amount: number,
   extra_hour: string = "0",
@@ -32,7 +41,7 @@ export async function patchUpdateImage(image: any) {
   }
 }
 
-export async function putUpdateUser(user:any) {
+export async function putUpdateUser(user: any) {
   try {
     await api.put("/register", user);
     Alert.alert("Sucesso", "Cadastrado com sucesso!");
@@ -43,7 +52,7 @@ export async function putUpdateUser(user:any) {
   }
 }
 
-export async function getLoadingUser(image:any) {
+export async function getLoadingUser(image: any) {
   try {
     await api.get("/user", image);
     return true;
